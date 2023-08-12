@@ -2,13 +2,13 @@ import pygame
 import random
 import os
 
-# Configuración de la pantalla
+# Config de pantalla
 pygame.init()
 WIDTH, HEIGHT = 800, 300
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
 pygame.display.set_caption("Dino Run")
 
-# Directorio donde se encuentra este script
+# Directorio 
 script_dir = os.path.dirname(__file__)
 
 # Cargar imágenes
@@ -16,7 +16,7 @@ background_img = pygame.image.load(os.path.join(script_dir, "background.png")).c
 dino_img = pygame.image.load(os.path.join(script_dir, "dino.png")).convert_alpha()
 cactus_img = pygame.image.load(os.path.join(script_dir, "cactus.png")).convert_alpha()
 
-# Escalar imagen de fondo inicial
+# fondo inicial
 scaled_background = pygame.transform.scale(background_img, (WIDTH, HEIGHT))
 
 # Variables del dino
@@ -27,10 +27,6 @@ GRAVITY = 1
 
 # Obstáculos
 obstacles = []
-
-# Reloj para controlar la velocidad del juego
-clock = pygame.time.Clock()
-
 # Variables para el estado del juego
 game_over = False
 score = 0
@@ -44,7 +40,7 @@ def restart_game():
     game_over = False
     score = 0
 
-# Main loop
+# bucle (main loop)
 running = True
 while running:
     for event in pygame.event.get():
@@ -58,6 +54,7 @@ while running:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_SPACE] and dino_rect.bottom == HEIGHT and not game_over:
         dino_y_speed = -15
+        
 
     # Aplicar gravedad
     dino_y_speed += GRAVITY
@@ -84,6 +81,7 @@ while running:
     for obstacle_rect in obstacles:
         if dino_rect.colliderect(obstacle_rect):
             game_over = True
+            
 
     # Renderizar
     screen.blit(scaled_background, (0, 0))
@@ -98,11 +96,10 @@ while running:
         screen.blit(text, text_rect)
 
     pygame.display.flip()
-    clock.tick(30)
+    print
 
     # Reiniciar juego si se presiona 'R'
     if game_over and keys[pygame.K_r]:
         restart_game()
 
 pygame.quit()
-git add
